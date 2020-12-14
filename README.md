@@ -1,4 +1,4 @@
 # Assembly
-##Um pouco do que aprendi na disciplina de Arquitetura de Computadores
+Um pouco do que aprendi na disciplina de Arquitetura de Computadores
 
-##PUCMINAS/2020-2
+PUCMINAS/2020-2
