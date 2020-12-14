@@ -1,0 +1,33 @@
+$s0 = A; $s1 = B;
+$s2 = C; $s3 = D;
+$s4 = E
+
+
+1) A = A+B
+
+add $s0, $s0,$s1
+
+2) A = B+C+(D*E)
+
+mul $t0, $s3,$s4
+add $t1, $s1,$s2
+add $s0,$t0,$t1
+
+3) A = (B-C)/A
+
+sub $t0,$s1,$s2
+div $s0,%t0,$s0
+
+4) A = (B*C) - (A/B)
+
+mul $t0,$s1,$s2
+div $t1,$s0,$s1
+sub $s0,$t0,$t1
+
+5) B = (C*C*C)/(D/E) 
+
+mul $t0,$s2,$s2
+mul $t0,$t0,$s2
+div $t1,$s3,$s4
+div $s1,$t0,$t1
+

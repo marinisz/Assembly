@@ -1,0 +1,37 @@
+$s0 = A; 
+$s1 = B; 
+$s2 = C; 
+$s3 = D;
+$s4 = E.
+
+Endereço	Conteúdo
+0	 
+4	         2 //  A
+8	         3 //  B
+12	         4 //  C
+16	         5 //  D
+20	         6 //  E
+24
+
+IF (A != B) {
+    B = C*D;
+    E = B + 4;
+} ELSE {
+    E = A/C;
+}
+
+LW $s0,4($zero)
+LW $s2,12($zero)
+LW $s3,16($zero)
+
+     BEQ $s0,$s1,ELSE
+     MUL $s1,$s2,$s3
+     SW  $s1,4($zero)
+     ADDi $t0,($zero),4
+     ADD $s4,$s1,$t0
+     SW  $s4,20($zero)
+     J,FIM
+ELSE:DIV $s4,$s0,$s2
+     SW  $s4,20($zero)
+FIM :JR $Ra
+    

@@ -1,0 +1,43 @@
+$s0 = SAIDA; $t0 = I
+
+E a seguinte configuração de memória:
+
+Endereço	Conteúdo
+...	 
+44		A[0]
+48		A[1]
+52		A[2]
+56		A[3]
+60		A[4]
+64		SAIDA
+...	
+Converter este código utilizando as instruções de lw e sw, além das instruções aritméticas e de desvio:
+
+I = 0;
+SAIDA = 1;
+WHILE(I < 5) {
+   IF (I <2)
+      SAIDA *= A[I];
+   ELSE
+      SAIDA /= A[I];
+    I++;
+}
+
+	ADD  $t0,$zero,$zero
+	ADDi $s0,$s0,1
+WHILE:  SLTi $t1,$t0,5
+	BEQ  $t1,$zero,FIM
+	SLTi $t1,$t0,2
+	BEQ  $t1,$zero,ELSE
+	MULi $t2,$t0,4
+	LW   $t3,4($t2)
+	MUL  $s0,$S0,$t3
+	ADDi $t0,$t0,1
+	J WHILE
+ELSE:	MULi $t2,$t0,4
+	LW   $t3,4($t2)
+	DIV $s0,$S0,$t3
+	ADDi $t0,$t0,1
+	J WHILE
+FIM:	SW $s0,64($zero)
+	JR $Ra

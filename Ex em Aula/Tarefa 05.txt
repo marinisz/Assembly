@@ -1,0 +1,44 @@
+$s0 = A; $s1 = B; $s2 = C;
+$s3 = D; $s4 = N;
+
+E a seguinte configuração de memória:
+
+Endereço	Conteúdo
+...	 
+44	
+48	D
+52	C
+56	B
+60	A
+64	N
+...	
+Converter este código utilizando as instruções 
+de lw e sw, além das instruções aritméticas e de 
+desvio:
+
+FOR (I =0; I < N; I++) {
+   IF (A > B)
+      A = A + B;
+   ELSE
+      A = C/D;
+}
+
+Obs: o contador I pode ser usado no registrador 
+temporário $t0.
+
+    LW $s4,64($zero)
+    ADD $t0,$zero,$zero
+    LW $s0,60($zero)
+    LW $s1,56($zero)
+    LW $s3,47($zero)
+    ADDi $s5,$zero,0
+FOR SLT $t1,$s5,$s4
+    BEQ $t1,$zero,FIM
+    SLT $t2,$s1,$s2
+    BEQ $t2,$zero,ELSE
+    ADD $s0,$s0,$s1
+    SW  $s0,56($zero)
+ELSE DIV $s0,$s0,$s3 
+    SW  $s0,56($zero)
+    J FOR
+FIM JR $Ra	

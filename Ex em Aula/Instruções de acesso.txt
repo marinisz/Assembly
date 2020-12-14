@@ -1,0 +1,21 @@
+C = (A*B)/(D-E)
+$s0 = A; $s1 = B; $s2 = C; 
+$s3 = D; $s4 = E
+ENDERECO - CONTEUDO - LETRA
+0 - 
+4 -          10          a
+8 -          17          b
+12 -                     c
+16 -         98          d
+20 -         53          e
+24 - 
+
+LW $s0,4($zero)
+LW $s1,8($zero)
+MUL $s2,$s0,$s1
+LW $s3,16($zero)
+LW $s4,20($zero)
+SUB $s3,$s3,$s4
+DIV $s2,$s2,$s3
+SW $s2,12($zero)
+

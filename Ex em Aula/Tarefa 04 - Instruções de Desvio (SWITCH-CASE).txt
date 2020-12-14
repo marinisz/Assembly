@@ -1,0 +1,51 @@
+Converter o código em C para o assembly do MIPS, 
+considerando que o conteúdo das variáveis serão 
+carregados em:
+
+$s0 = A; $s1 = B; $s2 = C; $s3 = D; $s4 = X
+
+E a seguinte configuração de memória:
+
+Endereço	       Conteúdo
+...	 
+24	                2 //  A
+28	                3 //  B
+32	                4 //  C
+36	                5 //  D
+40	                2 //  X
+44	
+...	
+Converter este código utilizando as instruções 
+de lw e sw, além das instruções aritméticas e de 
+desvio:
+
+SWITCH(X) {
+   CASE 3: A = B/C; BREAK;
+   CASE 2: D = B+C; BREAK;
+   CASE 1: A = (B*C)/D; BREAK;
+}
+
+RESOLUÇÃO:
+
+LW $s1,28($zero)
+LW $s2,32($zero)
+LW $s3,36($zero)
+LW $s4,40($zero)
+ADDi $t0,$t0,1
+ADDi $t1,$t1,2
+ADDi $t2,$t2,3
+
+    BEQ $s4,$t2,IF3
+    BEQ $s4,$t1,IF2
+    BEQ $s4,$t0,IF1
+    J END
+IF1:MUL $s0,$s1,$s2
+    DIV $s0,$s0,$S3
+    SW  $s0,24($zero)
+    J END
+IF2:ADD $s3,$s1,$s2
+    SW  $s3,36($zero)
+    J END
+IF3:DIV $s0,$s1,$s2
+    SW  $s0,24($zero)
+END:JR $Ra    
